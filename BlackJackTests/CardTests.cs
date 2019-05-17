@@ -5,7 +5,6 @@ namespace BlackJackTests
 {
     public class CardTests
     {
-
         public class ConstructorTests
         {
             [Fact]
