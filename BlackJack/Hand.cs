@@ -115,6 +115,13 @@ namespace BlackJack
 
         //******************************************************************************************
 
+        public List<Card> GetCards()
+        {
+            return cards;
+        }
+
+        //******************************************************************************************
+
         public static Hand operator +(Hand hand, Card card)
         {
             Hand toReturn = new Hand(hand);

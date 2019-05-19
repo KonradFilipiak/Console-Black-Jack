@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace BlackJackTests
@@ -30,11 +31,7 @@ namespace BlackJackTests
             }
 
             [Theory]
-            [InlineData(BlackJack.CardSymbol.Ace, 1)]
-            [InlineData(BlackJack.CardSymbol.Two, 2)]
-            [InlineData(BlackJack.CardSymbol.Nine, 9)]
-            [InlineData(BlackJack.CardSymbol.Teen, 10)]
-            [InlineData(BlackJack.CardSymbol.King, 10)]
+            [MemberData(nameof(CardsWithValue))]
             public void Card_Value_Should_Be_Assinged(BlackJack.CardSymbol symbol, int expected)
             {
                 var card = new BlackJack.Card(symbol, BlackJack.CardSuit.Hearts);
@@ -44,11 +41,7 @@ namespace BlackJackTests
             }
 
             [Theory]
-            [InlineData(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts, "Ah")]
-            [InlineData(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Clubs, "2c")]
-            [InlineData(BlackJack.CardSymbol.Nine, BlackJack.CardSuit.Diamonds, "9d")]
-            [InlineData(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades, "Ts")]
-            [InlineData(BlackJack.CardSymbol.King, BlackJack.CardSuit.Clubs, "Kc")]
+            [MemberData(nameof(CardsWithStringRepresentation))]
             public void Card_String_Representation_Should_Be_Assigned(
                 BlackJack.CardSymbol symbol, BlackJack.CardSuit suit, String expected)
             {
@@ -58,6 +51,26 @@ namespace BlackJackTests
 
                 Assert.Equal(expected, actual);
             }
+
+            public static IEnumerable<object[]> CardsWithValue =>
+                new List<object[]>
+                {
+                    new object[] {BlackJack.CardSymbol.Ace, 1},
+                    new object[] {BlackJack.CardSymbol.Two, 2},
+                    new object[] {BlackJack.CardSymbol.Nine, 9},
+                    new object[] {BlackJack.CardSymbol.Teen, 10},
+                    new object[] {BlackJack.CardSymbol.King, 10}
+                };
+
+            public static IEnumerable<object[]> CardsWithStringRepresentation =>
+                new List<object[]>
+                {
+                    new object[] {BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts, "Ah"},
+                    new object[] {BlackJack.CardSymbol.Two, BlackJack.CardSuit.Clubs, "2c"},
+                    new object[] {BlackJack.CardSymbol.Nine, BlackJack.CardSuit.Diamonds, "9d"},
+                    new object[] {BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades, "Ts"},
+                    new object[] {BlackJack.CardSymbol.King, BlackJack.CardSuit.Clubs, "Kc"},
+                };
         }
     }
 }
