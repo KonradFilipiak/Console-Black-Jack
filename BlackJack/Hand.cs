@@ -11,7 +11,7 @@ namespace BlackJack
         public bool IsDoubleValue { get; private set; }
 
         int value = 0;
-        internal List<Card> cards = new List<Card>();
+        List<Card> cards = new List<Card>();
 
         //******************************************************************************************
 
@@ -99,18 +99,16 @@ namespace BlackJack
 
         public Hand Split()
         {
+            Hand toReturn = new Hand();
+
             if (CanSplit)
             {
-                Hand toReturn = new Hand();
-
                 toReturn += cards[1];
                 cards.RemoveAt(1);
                 --CardsInHandAmount;
-
-                return toReturn;
             }
 
-            return null;
+            return toReturn;
         }
 
         //******************************************************************************************
