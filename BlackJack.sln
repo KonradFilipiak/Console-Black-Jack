@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack", "BlackJack\BlackJack.csproj", "{B56B8AAD-77DD-4E0C-B9C6-E49135731811}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackTests", "BlackJackTests\BlackJackTests.csproj", "{AD789750-9454-4308-8638-AFE67F9BBBC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{B56B8AAD-77DD-4E0C-B9C6-E49135731811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B56B8AAD-77DD-4E0C-B9C6-E49135731811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B56B8AAD-77DD-4E0C-B9C6-E49135731811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD789750-9454-4308-8638-AFE67F9BBBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD789750-9454-4308-8638-AFE67F9BBBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD789750-9454-4308-8638-AFE67F9BBBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD789750-9454-4308-8638-AFE67F9BBBC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
