@@ -11,45 +11,45 @@ namespace BlackJackTests
             [Fact]
             public void Card_Symbol_Should_Be_Assigned()
             {
-                var expected = BlackJack.CardSymbol.Ace;
+                var expectedSymbol = BlackJack.CardSymbol.Ace;
 
                 var card = new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts);
-                var actual = card.Symbol;
+                var actualSymbol = card.Symbol;
 
-                Assert.Equal(expected, actual);
+                Assert.Equal(expectedSymbol, actualSymbol);
             }
 
             [Fact]
             public void Card_Suit_Should_Be_Assigned()
             {
-                var expected = BlackJack.CardSuit.Hearts;
+                var expectedSuit = BlackJack.CardSuit.Hearts;
 
                 var card = new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts);
-                var actual = card.Suit;
+                var actualSuit = card.Suit;
 
-                Assert.Equal(expected, actual);
+                Assert.Equal(expectedSuit, actualSuit);
             }
 
             [Theory]
             [MemberData(nameof(CardsWithValue))]
-            public void Card_Value_Should_Be_Assinged(BlackJack.CardSymbol symbol, int expected)
+            public void Card_Value_Should_Be_Assinged(BlackJack.CardSymbol symbol, int expectedValue)
             {
                 var card = new BlackJack.Card(symbol, BlackJack.CardSuit.Hearts);
-                var actual = card.Value;
+                var actualValue = card.Value;
 
-                Assert.Equal(expected, actual);
+                Assert.Equal(expectedValue, actualValue);
             }
 
             [Theory]
             [MemberData(nameof(CardsWithStringRepresentation))]
             public void Card_String_Representation_Should_Be_Assigned(
-                BlackJack.CardSymbol symbol, BlackJack.CardSuit suit, String expected)
+                BlackJack.CardSymbol symbol, BlackJack.CardSuit suit, String expectedString)
             {
                 var card = new BlackJack.Card(symbol, suit);
 
-                var actual = card.ToString();
+                var actualString = card.ToString();
 
-                Assert.Equal(expected, actual);
+                Assert.Equal(expectedString, actualString);
             }
 
             public static IEnumerable<object[]> CardsWithValue =>

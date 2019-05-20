@@ -11,7 +11,7 @@ namespace BlackJack
         public bool IsDoubleValue { get; private set; }
 
         int value = 0;
-        internal List<Card> cards = new List<Card>();
+        List<Card> cards = new List<Card>();
 
         //******************************************************************************************
 
