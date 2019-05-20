@@ -5,14 +5,10 @@ namespace BlackJackTests
 {
     public class HandTests
     {
-        public class ConstructorTests
-        {
-        }
-
         public class ValueTests
         {
             [Theory]
-            [MemberData(nameof(CardsWithNoAceList))]
+            [MemberData(nameof(CardsWithNoAce))]
             public void Value_Should_Be_A_Sum_Of_Card_Values_If_There_Is_No_Ace
                 (int expectedValue, params BlackJack.Card[] cards)
             {
@@ -47,7 +43,7 @@ namespace BlackJackTests
                 Assert.Equal(expectedValue, actualValue);
             }
 
-            public static IEnumerable<object[]> CardsWithNoAceList =>
+            public static IEnumerable<object[]> CardsWithNoAce =>
                 new List<object[]>
             {
                 new object[]
@@ -106,6 +102,7 @@ namespace BlackJackTests
                         new BlackJack.Card(BlackJack.CardSymbol.Three, BlackJack.CardSuit.Diamonds)
                     },
                 };
+
             public static IEnumerable<object[]> CardsWithAceWithValueOfOne =>
                 new List<object[]>
                 {
@@ -133,6 +130,231 @@ namespace BlackJackTests
                         new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds)
                     }
                 };
+        }
+
+        public class CanDoubleTests
+        {
+            [Fact]
+            public void Can_Double_Is_True_If_There_Are_Two_Cards_And_Value_Is_Less_Then_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.True(hand.CanDouble);
+            }
+
+            [Fact]
+            public void Can_Double_Is_False_If_There_Is_More_Then_2_Cards()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Three, BlackJack.CardSuit.Spades),
+                    new BlackJack.Card(BlackJack.CardSymbol.Four, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanDouble);
+            }
+
+            [Fact]
+            public void Can_Double_Is_False_If_Value_Is_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanDouble);
+            }
+        }
+
+        public class CanSplitTests
+        {
+            [Fact]
+            public void Can_Split_Is_True_If_There_Are_Two_Cards_And_They_Have_The_Same_Value()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.True(hand.CanSplit);
+            }
+
+            [Fact]
+            public void Can_Split_Is_False_If_There_Is_More_Then_2_Cards()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades),
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanSplit);
+            }
+
+            [Fact]
+            public void Can_Split_Is_False_If_Cards_Have_Different_Values()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanSplit);
+            }
+        }
+
+        public class CanSurrenderTests
+        {
+            [Fact]
+            public void Can_Surrender_Is_True_If_There_Are_Two_Cards_And_Value_Is_Not_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.True(hand.CanSurrender);
+            }
+
+            [Fact]
+            public void Can_Surrender_Is_False_If_There_Is_More_Then_2_Cards()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Spades),
+                    new BlackJack.Card(BlackJack.CardSymbol.Three, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanSurrender);
+            }
+
+            [Fact]
+            public void Can_Surrender_Is_False_If_Values_Equals_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.CanSurrender);
+            }
+        }
+
+        public class IsBlackJackTests
+        {
+            [Fact]
+            public void Is_BlackJack_Is_True_If_There_Are_2_Cards_And_Value_Equals_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.True(hand.IsBlackJack);
+            }
+
+            [Fact]
+            public void Is_BlackJack_Is_True_If_There_Is_More_Then_2_Cards()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.Eight, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.IsBlackJack);
+            }
+
+            [Fact]
+            public void Is_BlackJack_Is_True_If_Value_Is_Not_21()
+            {
+                var cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.Eight, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Two, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Spades)
+                };
+
+                var hand = new BlackJack.Hand(cards);
+
+                Assert.False(hand.IsBlackJack);
+            }
+        }
+
+        public class SplitTests
+        {
+            List<BlackJack.Card> cards;
+            BlackJack.Hand hand;
+            List<BlackJack.Card> expectedCards = new List<BlackJack.Card>();
+
+            public SplitTests()
+            {
+                cards = new List<BlackJack.Card>
+                {
+                    new BlackJack.Card(BlackJack.CardSymbol.Teen, BlackJack.CardSuit.Diamonds),
+                    new BlackJack.Card(BlackJack.CardSymbol.King, BlackJack.CardSuit.Clubs)
+                };
+
+                hand = new BlackJack.Hand(cards);
+            }
+
+            [Fact]
+            public void Current_Hand_Has_Only_The_First_Card_After_Split()
+            {
+                expectedCards.Add(hand.GetCards()[0]);
+
+                hand.Split();
+                var actualCards = hand.GetCards();
+
+                Assert.Equal(expectedCards, actualCards);
+            }
+
+            [Fact]
+            public void New_Hand_Has_Only_The_Second_Card_From_Existing_Hand()
+            {
+                expectedCards.Add(hand.GetCards()[1]);
+
+                var newHand = hand.Split();
+                var actualCards = newHand.GetCards();
+
+                Assert.Equal(expectedCards, actualCards);
+            }
         }
     }
 }

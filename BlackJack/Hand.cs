@@ -99,18 +99,16 @@ namespace BlackJack
 
         public Hand Split()
         {
+            Hand toReturn = new Hand();
+
             if (CanSplit)
             {
-                Hand toReturn = new Hand();
-
                 toReturn += cards[1];
                 cards.RemoveAt(1);
                 --CardsInHandAmount;
-
-                return toReturn;
             }
 
-            return null;
+            return toReturn;
         }
 
         //******************************************************************************************

@@ -8,28 +8,6 @@ namespace BlackJackTests
     {
         public class ConstructorTests
         {
-            [Fact]
-            public void Card_Symbol_Should_Be_Assigned()
-            {
-                var expectedSymbol = BlackJack.CardSymbol.Ace;
-
-                var card = new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts);
-                var actualSymbol = card.Symbol;
-
-                Assert.Equal(expectedSymbol, actualSymbol);
-            }
-
-            [Fact]
-            public void Card_Suit_Should_Be_Assigned()
-            {
-                var expectedSuit = BlackJack.CardSuit.Hearts;
-
-                var card = new BlackJack.Card(BlackJack.CardSymbol.Ace, BlackJack.CardSuit.Hearts);
-                var actualSuit = card.Suit;
-
-                Assert.Equal(expectedSuit, actualSuit);
-            }
-
             [Theory]
             [MemberData(nameof(CardsWithValue))]
             public void Card_Value_Should_Be_Assinged(BlackJack.CardSymbol symbol, int expectedValue)
